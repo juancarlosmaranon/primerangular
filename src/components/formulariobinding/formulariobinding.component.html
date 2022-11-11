@@ -1,0 +1,55 @@
+<div>
+    <h1>
+        Formulario Binding
+    </h1>
+    <h2>
+        {{mensaje}}
+    </h2>
+    <!-- EL FORMULARIO DEBE CONTENER UN ID DE ANGULAR 
+    INDICANDO COMO VALOR LA DIRECTIVA ngForm -->
+    <form #userForm="ngForm" (ngSubmit)="recibirDatos()">
+        <label>Nombre: </label>
+        <!-- LOS CONTROLES DE FORMULARIO DEBEN TENER UN ID DE ANGULAR
+        INDICANDO COMO VALOR LA DIRECTIVA ngModel
+        PARA INDICAR EL MODELO DEL BINDING SE REALIZA LA SIGUIENTE
+        SINTAXIS [(ngModel)]="modelo" -->
+        <input type="text" name="cajanombre"
+        #cajanombre="ngModel"
+        [(ngModel)]="user.nombre" required/>
+        <label style="color:red"
+        *ngIf="!cajanombre.valid">
+            El Nombre es obligatorio
+        </label>
+        <br/>
+
+        <label>Apellidos: </label>
+        <input type="text"name="cajapellidos"
+        #cajapellidos="ngModel"
+        [(ngModel)]="user.apellidos"
+        pattern="^[A-Z]{1}[a-z]{2}" required/>
+        <label style="color:red"
+        *ngId="cajapellidos.valid == false && cajapellidos.touched">
+            El apellido debe empezar en mayus y tener maximo 3 carac
+        </label>
+        <br/>
+
+        <label>Edad: </label>
+        <input type="number"name="cajaedad"
+        #cajaedad="ngModel"
+        [(ngModel)]="user.edad"/><br/>
+        <button [disabled]="!userForm.valid">
+            Enviar datos
+        </button>
+    </form>
+    <hr/>
+    <h2 style="color:rebeccapurple">
+        Nombre: {{user.nombre}}
+    </h2>
+    <h2 style="color:red">
+        Apellidos: {{user.apellidos}}
+    </h2>
+    <h2 style="color:blue">
+        Edad: {{user.edad}}
+    </h2>
+
+</div>
